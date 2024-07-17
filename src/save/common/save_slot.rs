@@ -1462,9 +1462,9 @@ pub struct SaveSlot {
     pub ga_item_data: GaItemData,
     _tutorial_data: [u8;0x408],
     _0x3_1: [u8; 0x3],
-    pub death_counter: u32, 
-    _c0xffffffff: u32, 
-    _c0x800: u16, 
+    pub death_counter: u32,
+    _c0xffffffff: u32,
+    _c0x800: u16,
     _0x10_1: [u8; 0x10],
     pub event_flags: EventFlags,
     _0x1_1: u8,
@@ -1520,10 +1520,10 @@ impl Default for SaveSlot {
             ga_item_data: GaItemData::default(),
             _tutorial_data: [0x0;0x408],
             _0x3_1: [0x0; 0x3],
-            death_counter: 0, 
-            _c0xffffffff: 0, 
-            _c0x800: 0, 
-            _0x10_1: [0x0; 0x10],            
+            death_counter: 0,
+            _c0xffffffff: 0,
+            _c0x800: 0,
+            _0x10_1: [0x0; 0x10],
             _unk_lists: Vec::new(),
             player_coords: PlayerCoords::default(),
             _game_man_unkown_values: [0x0; 0xf],
@@ -1564,12 +1564,12 @@ impl Read for SaveSlot {
 
         // Player Game Data (Health, Fp, Stats, etc...)
         save_slot.player_game_data = PlayerGameData::read(br)?;
-        
+
         save_slot._0xd0.copy_from_slice(br.read_bytes(0xd0)?);
-        
+
         // Equip Data
         save_slot.equip_data = EquipData::read(br)?;
-        
+
         // Chr Asm
         save_slot.chr_asm = ChrAsm::read(br)?;
 
@@ -1786,11 +1786,11 @@ impl Write for SaveSlot {
 
         // Death counter
         bytes.extend(self.death_counter.to_le_bytes());
-        
-        // 0xffffffff (Using for validation) 
+
+        // 0xffffffff (Using for validation)
         bytes.extend(self._c0xffffffff.to_le_bytes());
-        
-        // 0x800 (Using for validation) 
+
+        // 0x800 (Using for validation)
         bytes.extend(self._c0x800.to_le_bytes());
 
         // Event Flags 
